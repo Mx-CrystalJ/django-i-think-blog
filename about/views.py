@@ -1,9 +1,18 @@
 from django.shortcuts import render
 
 # Create your views here.
-def about_view(request):
-    # Get About content from the database (if applicable)
-    about_content = About.objects.all().first()  # Get the first record
+from django.shortcuts import render
+from .models import About
 
-    context = {'about': about_content}
-    return render(request, 'templates/about/about.html', context)
+
+def about_me(request):
+    """
+    Renders the About page
+    """
+    about = About.objects.all().order_by('-updated_on').first()
+
+    return render(
+        request,
+        "about/about.html",
+        {"about": about},
+    )
