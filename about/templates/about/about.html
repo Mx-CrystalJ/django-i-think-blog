@@ -7,7 +7,11 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-12 col-md-4 text-center">
-      <img src="{% static 'images/nobody.jpg' %}" width="75%">
+      {% if "placeholder" in post.featured_image.url %}
+      <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+      {% else %}
+      <img class="card-img-top" src=" {{ post.featured_image.url }}" alt="{{ post.title }}">
+      {% endif %}
     </div>
     <div class="col-12 col-md-8">
       <h2>{{ about.title }}</h2>
